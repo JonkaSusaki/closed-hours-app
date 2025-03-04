@@ -30,3 +30,14 @@ model Session {
   collaborator  Boolean?  @default(false)
   emailVerified Boolean?  @default(false)
 }
+
+model ClosedHour {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  createdBy   BigInt?
+  modifiedAt  DateTime @default(now())
+  modifiedBy  BigInt?
+  initialHour String
+  finalHour   String
+  deleted     Boolean  @default(false)
+}
