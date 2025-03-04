@@ -7,7 +7,7 @@ import {
   Button,
   BlockStack,
   InlineStack,
-  Badge,
+  // Badge,
   DataTable,
   ButtonGroup,
   Icon,
@@ -24,11 +24,34 @@ import {
 import { getShopTimezone } from "app/queries/timezone";
 import { DeleteIcon, EditIcon } from "@shopify/polaris-icons";
 
+/*
+import {
+  createCloseHourDefinition,
+  getCloseHour,
+  getCloseHourDefinitionId,
+} from "app/queries/closeHour.metafield";
+  Definitions way:
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { admin } = await authenticate.admin(request);
 
   const timezone = await getShopTimezone(admin.graphql);
 
+  const closeHourDefinitionId = await getCloseHourDefinitionId(admin.graphql);
+
+  if (!closeHourDefinitionId) {
+    await createCloseHourDefinition(admin.graphql);
+  }
+  const response = await getCloseHour(admin.graphql);
+
+  return json(response.nodes);
+};
+
+*/
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const { admin } = await authenticate.admin(request);
+
+  const timezone = await getShopTimezone(admin.graphql);
   const closedHours = await getClosedHourList();
 
   return json(parseClosedHour(closedHours, timezone));
@@ -158,26 +181,6 @@ export default function Index() {
                 </BlockStack>
               </BlockStack>
             </Card>
-          </Layout.Section>
-
-          <Layout.Section variant="oneThird">
-            <BlockStack gap="500">
-              <Card>
-                <BlockStack gap="200">
-                  <Text as="h2" variant="headingMd">
-                    Your shop is: <Badge tone="success">Open</Badge>
-                  </Text>
-
-                  <InlineStack align="space-between">
-                    <Text as="span" variant="bodyMd">
-                      Next closing will be at:
-                    </Text>
-
-                    <Text as="strong">8 pm</Text>
-                  </InlineStack>
-                </BlockStack>
-              </Card>
-            </BlockStack>
           </Layout.Section>
         </Layout>
       </BlockStack>

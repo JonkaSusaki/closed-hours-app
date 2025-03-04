@@ -27,6 +27,7 @@ import {
   updateClosedHour,
   validateClosedHour,
 } from "app/models/closedHour.server";
+// import { createCloseHour } from "app/queries/closeHour.metafield";
 import { getShopTimezone } from "app/queries/timezone";
 import { authenticate } from "app/shopify.server";
 import type {
@@ -72,6 +73,8 @@ export async function action({ request, params }: ActionFunctionArgs) {
   }
 
   if (params.id === "new") {
+    // const response = await createCloseHour(admin.graphql, body);
+
     await createClosedHour(body);
   } else {
     await updateClosedHour(body, Number(params.id));

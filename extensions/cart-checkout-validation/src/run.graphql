@@ -1,0 +1,19 @@
+query RunInput {
+  shop {
+    localTime {
+      date
+    }
+    metafield(key: "custom-hour") {
+      value
+    }
+  }
+  cart {
+    buyerIdentity {
+      customer {
+        metafield(namespace: "custom", key: "timezone") {
+          value
+        }
+      }
+    }
+  }
+}

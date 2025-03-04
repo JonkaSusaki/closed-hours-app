@@ -10,7 +10,7 @@
  */
 export function convertTimeToUTC(
   time: string,
-  timezone: string = "America/New_York",
+  timezone: string = "America/Sao_Paulo",
 ) {
   const [hours, minutes] = time.split(":").map(Number);
   const now = new Date();
